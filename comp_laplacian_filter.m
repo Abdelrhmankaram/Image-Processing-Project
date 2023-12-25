@@ -1,5 +1,5 @@
 function [after] = comp_laplacian_filter(img)
-    mask = [0,-1,0;-1,9,-1;0,-1,0];
+    mask = [0,-1,0;-1,5,-1;0,-1,0];
     [H, W, L] = size(img); % H -> 256 W -> 256
     [X, Y] = size(mask);
     
