@@ -1,5 +1,5 @@
 function [after] = sobel_hor_filter(img)
-    mask = [-1,-2,-1;0,0,0;1,2,1];
+    mask = [-1,-2,-1; 0,0,0; 1,2,1];
     [H, W, L] = size(img); % H -> 256 W -> 256
     [X, Y] = size(mask);
     

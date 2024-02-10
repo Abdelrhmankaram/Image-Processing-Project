@@ -1,20 +1,20 @@
-function [noisy_image] = exp_noise(image,a)
+function new_img = exp_noise(img, a)
+    img = double(img);
+    [h, w, ~] = size(img);
 
-[h, w, L] = size(image);
-
-num_of_pixels = round((-log(1 - rand(1, 1)) / a) * w * h  );
-
-for level = 1 : L
-    
-    for i = 1 : 256
-        for j = num_of_pixels
+    for i = 1:255
+        num_of_pixel = round((a * exp((-1 * a * i))) * w * h);
+        for j = 1:num_of_pixel
             row = ceil(rand(1, 1) * h);
-            col = ceil(rand(1, 1) * w);
-            image(row, col, level) = image(row, col, level) + i;
+            colum = ceil(rand(1, 1) * w);
+            img(row, colum) = img(row, colum) + i;
         end
     end
-   
-end
-image = min(max(image, 0), 255);
-noisy_image = uint8(image);
+
+    for k = 1:size(img, 3)
+        mn = min(img(:, :, k), [], 'all');
+        mx = max(img(:, :, k), [], 'all');
+        new_img(:, :, k) = ((img(:, :, k) - mn) / (mx - mn)) * 255;
+    end
+    new_img = uint8(new_img);
 end
